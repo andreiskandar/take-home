@@ -34,30 +34,40 @@
 
 ## :telescope: Criteria (What the review team will be looking for)
 
-1. Robust error handling
+> **Please read carefully**: *We are providing the below information to help you succeed*.
+> If there are questions about the project specifications please email *matt@dmgblockchain.com* for backend questions,
+> or *ryo@dmgblockchain.com* for front-end questions. Emailing on the weekend is fine.
+
+1. The project has a clean folder structure with clear seperation of backend and frontend code.
+  - All code is formatted in a unified manner using a `.prettierrc.json`
+  - All code obeys the [Js Doc commenting style](https://jsdoc.app/about-getting-started.html)
+
+2. Git branching strategies were used
+  - a dev branch was created for 
+
+3. Robust error handling
   - Custom Error classes were made, that were thrown/caught in proper places.
 
-2. Code Modularity
+4. Code Modularity
   - An indepth understanding of Object Oriented Design principles, encapsulation
     and abstraction was demonstrated.
   - The code flow is easily understandable, variable names are descriptive, and the code
     was well documented with comments.
 
-3. Typescripts static typing features were used.
+5. Typescripts static typing features were used.
   - The applicant clearly understands statically typed methodologies.
     - Interfaces were used to create custom types.
   - The applicant *did not* simply rename javascript files with the `.ts` extension
   - The applicant clearly shows understanding of async/await and Promises.
 
-4. Unit tests
+6. Unit tests
   - The backend code base was unit tested with `jest`
   - :no_entry_sign: **Do not write tests for the front-end**
 
-5. React Component resusability
+7. React Component resusability
   - Component props abstracted into classes/objects
 
-6. React Hooks
+8. React Hooks
   - Components are rendered efficiently, and a deep understanding of react hooks
     was demonstrated.
-
 
