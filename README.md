@@ -1,7 +1,7 @@
 # Take home assignment
 
-> :timer_clock: This project should be completed in 48 hours, expected to be done over the
-> February 26th-27th.
+> :timer_clock: This project should be completed in 48 hours, expected to be done over
+> February 26th-27th weekend.
 
 ## :information_source: Directions
 
@@ -11,7 +11,6 @@
 ### :scroll: The Backend
 
 > Write a Node.JS back-end that contains one endpoint that utilzes an http GET request and returns the following crypto currency data.
-
 
 1. Ticker (Name of the crypto currency in question)
 2. Price
