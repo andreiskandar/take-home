@@ -42,7 +42,7 @@
 
 1. The project has a clean folder structure with clear seperation of backend and frontend code.
   - All code is formatted in a unified manner using a `.prettierrc.json`
-  - All code obeys the [Js Doc commenting style](https://jsdoc.app/about-getting-started.html)
+  - All code obeys the [Ts Doc commenting style](https://tsdoc.org/)
 
 2. Git branching strategies were used
   - Feature branches were clearly named and branch off of a `dev` branch
