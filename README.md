@@ -1,5 +1,8 @@
 # Take home assignment
 
+> :timer_clock: This project should be completed in 48 hours, expected to be done over the
+> February 26th-27th.
+
 ## :information_source: Directions
 
 * Fork this repository and implement the following functionality
@@ -43,7 +46,8 @@
   - All code obeys the [Js Doc commenting style](https://jsdoc.app/about-getting-started.html)
 
 2. Git branching strategies were used
-  - a dev branch was created for 
+  - Feature branches were clearly named and branch off of a `dev` branch
+  - The applicant demonstrates a strong understanding of version control 
 
 3. Robust error handling
   - Custom Error classes were made, that were thrown/caught in proper places.
