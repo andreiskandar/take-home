@@ -4,11 +4,16 @@
   "description": "> :timer_clock: This project should be completed in 48 hours, expected to be done over > February 26th-27th weekend.",
   "main": "index.ts",
   "dependencies": {
-    "express": "^4.17.3"
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "coingecko-api": "^1.0.10",
+    "cors": "^2.8.5",
+    "express-pino-logger": "^7.0.0",
+    "pino-colada": "^2.2.2"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.ts",
+    "start": "node ./server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
