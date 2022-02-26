@@ -5,7 +5,9 @@
   "main": "index.ts",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-pino-logger": "^7.0.0",
+    "pino-colada": "^2.2.2"
   },
   "devDependencies": {},
   "scripts": {
