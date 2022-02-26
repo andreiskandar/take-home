@@ -5,13 +5,17 @@
   "main": "index.ts",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3",
     "coingecko-api": "^1.0.10",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "express-pino-logger": "^7.0.0",
     "pino-colada": "^2.2.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "ts-node": "^10.5.0"
+  },
   "scripts": {
     "start": "node ./server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

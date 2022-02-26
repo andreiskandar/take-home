@@ -2,32 +2,31 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const pino = require('pino');
 const expressPino = require('express-pino-logger');
-
 const cors = require('cors');
+const dotenv = require('dotenv');
 const CoinGecko = require('coingecko-api');
 
+// initialize configuration
+dotenv.config();
 const app = express();
-// const PORT = process.env.PORT || 3000;
-const PORT = 3000;
-
+const PORT = process.env.SERVER_PORT || 3000;
 const logger = pino({
-  prettifier: require('pino-colada'),
+  prettifier: require('pino-colada')
 });
-
 const expressLogger = expressPino({ logger });
+const CoinGeckoClient = new CoinGecko();
 
+// implement middleware
 app.use(expressLogger);
 app.use(bodyParser.json());
 app.use(cors());
-
-const CoinGeckoClient = new CoinGecko();
 
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
 app.get('/api/coin/:ticker', async (req, res) => {
-  console.log('req backend:', req);
+  logger.info('Grabbing ticker information');
   const { ticker } = req.params;
   const data = await CoinGeckoClient.coins.fetch(ticker);
   console.log('data:', data);
