@@ -4,6 +4,8 @@ const pino = require('pino');
 const expressPino = require('express-pino-logger');
 
 const cors = require('cors');
+const CoinGecko = require('coingecko-api');
+
 const app = express();
 // const PORT = process.env.PORT || 3000;
 const PORT = 3000;
@@ -18,6 +20,7 @@ app.use(expressLogger);
 app.use(bodyParser.json());
 app.use(cors());
 
+const CoinGeckoClient = new CoinGecko();
 
 app.get('/', (req, res) => {
   res.send('Hello World');
