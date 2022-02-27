@@ -1,40 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Container } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import './App.css';
-
-type Ticker = {
-  ticker: string;
-  value: string;
-};
+import Price from './components/Price';
 
 function App() {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, resetField } = useForm();
 
-  useEffect(() => {
-    axios.get('/').then((res) => console.log(res));
-  }, []);
+  const [prices, setPrices] = useState({});
 
-  const onSubmit = (data: Ticker) => {
+  const onSubmit = (data: any) => {
+    console.log('data:', typeof data);
     const { ticker } = data;
     // api call to the backend
-    const res = axios.get(`/api/coin/${ticker}/`).then((data) => {
-      console.log(JSON.stringify(data));
-    });
+    const res = axios
+      .get(`/api/coin/${ticker}/`)
+      .then(({ data }) => {
+        const { market_data, name } = data;
+        const { current_price } = market_data;
+        setPrices(current_price);
+
+        resetField('ticker');
+      })
+      .catch((e) => console.log(e));
 
     // clear input
   };
 
+  const renderPrices = () => {
+    return Object.entries(prices).map(([currency, price]) => (
+      <Price key={currency} currency={currency} price={price} />
+    ));
+  };
+
   return (
-    <div className='App'>
+    <Container className="App" fixed>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField id='ticker' variant='outlined' {...register('ticker')} />
-        <Button type='submit' variant='contained'>
+        <TextField
+          id="ticker"
+          variant="outlined"
+          {...register('ticker')}
+          placeholder="Please Enter Ticker"
+        />
+        <Button type="submit" variant="contained">
           Get Price
         </Button>
       </form>
-    </div>
+      {Object.values(prices).length > 0 && (
+        <table>
+          <thead>
+            <tr>
+              <td>Currency</td>
+              <td>Price</td>
+            </tr>
+          </thead>
+          <tbody>{renderPrices()}</tbody>
+        </table>
+      )}
+    </Container>
   );
 }
 
