@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { TextField, Button, Container } from '@material-ui/core';
+import {
+  TextField,
+  Button,
+  Container,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Table,
+  Paper
+} from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import './App.css';
 import Price from './components/Price';
@@ -72,15 +83,17 @@ function App() {
         <Error error={error.error} message={error.message} />
       ) : (
         Object.values(prices).length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <td>Currency</td>
-                <td>Price</td>
-              </tr>
-            </thead>
-            <tbody>{renderPrices()}</tbody>
-          </table>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Currency</TableCell>
+                  <TableCell>Price</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{renderPrices()}</TableBody>
+            </Table>
+          </TableContainer>
         )
       )}
     </Container>
