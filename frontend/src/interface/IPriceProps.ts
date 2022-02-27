@@ -1,4 +1,4 @@
-export interface PriceProps {
+export interface IPriceProps {
   currency: string;
   price: any;
 }
