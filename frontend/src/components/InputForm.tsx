@@ -3,13 +3,19 @@ import { useForm } from 'react-hook-form';
 import { TextField, Button } from '@material-ui/core';
 import { IErrorProps } from '../interface/IErrorProps';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/styles';
 
 interface IInputFormProps {
   setPricesData: (pricesData: object) => void;
   setError: (error: IErrorProps) => void;
 }
 
+const useStyles = makeStyles({
+  form: { margin: '30px' }
+});
+
 const InputForm: FC<IInputFormProps> = ({ setPricesData, setError }) => {
+  const classes = useStyles();
   const { handleSubmit, register, resetField } = useForm();
 
   const onSubmit = (data: any): void => {
@@ -48,15 +54,16 @@ const InputForm: FC<IInputFormProps> = ({ setPricesData, setError }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
       <TextField
         id="ticker"
         variant="outlined"
         placeholder="Please Enter Ticker"
         size="small"
         {...register('ticker')}
+        className={classes.form}
       />
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" color="primary" className={classes.form}>
         Get Price
       </Button>
     </form>
