@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactElement } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   TableContainer,
@@ -11,8 +11,7 @@ import {
 } from '@material-ui/core';
 
 interface IPriceTableProps {
-  // children: ReactNode;
-  renderPrices: () => ReactNode;
+  renderPrices: () => ReactElement[];
 }
 
 const useStyles = makeStyles({
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-const PriceTable: FC<IPriceTableProps> = ({ renderPrices }) => {
+const PriceTable: FC<IPriceTableProps> = ({ renderPrices }): ReactElement => {
   const classes = useStyles();
 
   return (
