@@ -1,8 +1,7 @@
-import { useState, ReactElement } from 'react';
+import { useState } from 'react';
 import { Container } from '@material-ui/core';
 import './App.css';
 
-import Price from './components/Price';
 import Error from './components/Error';
 import PriceTable from './components/PriceTable';
 import InputForm from './components/InputForm';
@@ -16,19 +15,13 @@ function App() {
     message: ''
   });
 
-  const renderPrices = (): ReactElement[] => {
-    return Object.entries(pricesData).map(([currency, price]) => (
-      <Price key={currency} currency={currency} price={price} />
-    ));
-  };
-
   return (
     <Container className="App" fixed>
       <InputForm setPricesData={setPricesData} setError={setError} />
       {error.error ? (
         <Error error={error.error} message={error.message} />
       ) : (
-        Object.values(pricesData).length > 0 && <PriceTable renderPrices={renderPrices} />
+        Object.values(pricesData).length > 0 && <PriceTable pricesData={pricesData} />
       )}
     </Container>
   );

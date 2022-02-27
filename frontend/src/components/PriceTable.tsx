@@ -9,9 +9,10 @@ import {
   Table,
   Paper
 } from '@material-ui/core';
+import Price from './Price';
 
 interface IPriceTableProps {
-  renderPrices: () => ReactElement[];
+  pricesData: object;
 }
 
 const useStyles = makeStyles({
@@ -20,8 +21,14 @@ const useStyles = makeStyles({
   }
 });
 
-const PriceTable: FC<IPriceTableProps> = ({ renderPrices }): ReactElement => {
+const PriceTable: FC<IPriceTableProps> = ({ pricesData }): ReactElement => {
   const classes = useStyles();
+
+  const renderPriceRow = (): ReactElement[] => {
+    return Object.entries(pricesData).map(([currency, price]) => (
+      <Price key={currency} currency={currency} price={price} />
+    ));
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -32,7 +39,7 @@ const PriceTable: FC<IPriceTableProps> = ({ renderPrices }): ReactElement => {
             <TableCell align="right">Price</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{renderPrices()}</TableBody>
+        <TableBody>{renderPriceRow()}</TableBody>
       </Table>
     </TableContainer>
   );
