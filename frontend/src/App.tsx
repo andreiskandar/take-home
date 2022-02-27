@@ -4,28 +4,49 @@ import { TextField, Button, Container } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import './App.css';
 import Price from './components/Price';
+import { IErrorProps } from './interface/IErrorProps';
+import Error from './components/Error';
 
 function App() {
   const { handleSubmit, register, resetField } = useForm();
-
   const [prices, setPrices] = useState({});
+  const [error, setError] = useState<IErrorProps>({
+    error: false,
+    message: ''
+  });
 
   const onSubmit = (data: any) => {
-    console.log('data:', typeof data);
     const { ticker } = data;
-    // api call to the backend
-    const res = axios
-      .get(`/api/coin/${ticker}/`)
-      .then(({ data }) => {
-        const { market_data, name } = data;
-        const { current_price } = market_data;
-        setPrices(current_price);
+    let errorMessage = '';
+    if (ticker) {
+      // api call to the backend
+      const res = axios
+        .get(`/api/coin/${ticker}/`)
+        .then(({ data }) => {
+          if (data.error) {
+            errorMessage = data.error;
+            setError({ error: true, message: errorMessage });
+            return;
+          }
 
-        resetField('ticker');
-      })
-      .catch((e) => console.log(e));
+          const { market_data, name } = data;
+          const { current_price } = market_data;
+          setPrices(current_price);
 
-    // clear input
+          reset();
+        })
+        .catch((e) => {
+          errorMessage = 'Something is wrong. Please contact administrator';
+          setError({ error: true, message: errorMessage });
+        });
+    } else {
+      setError({ error: true, message: 'Please enter ticker!' });
+    }
+  };
+
+  const reset = (): void => {
+    resetField('ticker');
+    setError({ error: false, message: '' });
   };
 
   const renderPrices = () => {
@@ -47,16 +68,20 @@ function App() {
           Get Price
         </Button>
       </form>
-      {Object.values(prices).length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <td>Currency</td>
-              <td>Price</td>
-            </tr>
-          </thead>
-          <tbody>{renderPrices()}</tbody>
-        </table>
+      {error.error ? (
+        <Error error={error.error} message={error.message} />
+      ) : (
+        Object.values(prices).length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <td>Currency</td>
+                <td>Price</td>
+              </tr>
+            </thead>
+            <tbody>{renderPrices()}</tbody>
+          </table>
+        )
       )}
     </Container>
   );
