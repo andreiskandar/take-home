@@ -1,4 +1,4 @@
 export interface IPriceProps {
   currency: string;
-  price: any;
+  price: number;
 }
