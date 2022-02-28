@@ -24,7 +24,7 @@ const InputForm: FC<IInputFormProps> = ({ setPricesData, setError }) => {
     let errorMessage = '';
     if (ticker) {
       // api call to the backend
-      const res = axios
+      axios
         .get(`/api/coin/${ticker}/`)
         .then(({ data }) => {
           if (data.error) {
@@ -33,14 +33,14 @@ const InputForm: FC<IInputFormProps> = ({ setPricesData, setError }) => {
             return;
           }
 
-          const { market_data, name } = data;
+          const { market_data } = data;
           const { current_price } = market_data;
           setPricesData(current_price);
 
           reset();
         })
         .catch((e) => {
-          errorMessage = 'Something is wrong. Please contact administrator';
+          errorMessage = 'Something is wrong. Please contact administrator.';
           setError({ error: true, message: errorMessage });
         });
     } else {
